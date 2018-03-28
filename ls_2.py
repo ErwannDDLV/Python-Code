@@ -11,10 +11,14 @@ import time
 from datetime import datetime 
 
 def file_list(path):
+    total = []
     if os.path.isdir(path):
         for file in os.listdir(path):
             if os.path.isfile(os.path.join(path, file)) and not file.startswith('.'):
+                total.append(file)
                 print(file)
+        if len(total) == 0:
+            print('No file in your directory : %s' % path)
     else:
         for file in glob.glob(path + '*.*', recursive=True):
             print(os.path.basename(file))
@@ -24,6 +28,8 @@ def files_list_mode(path):
     for file in os.listdir(path):
         if os.path.isfile(os.path.join(path, file)) and not file.startswith('.'):
             total.append(file)
+    if len(total) == 0:
+        print('No file in your directory : %s' % path)
     print('total : %s' % len(total))
 
     for file in os.listdir(path):
