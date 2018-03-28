@@ -63,8 +63,6 @@ def parse_args(args):
     parser.add_argument("path", help='path to your folder')
     parser.add_argument('-l', "--files_list_mode", action = 'store_const', const = files_list_mode, help='List files from your directory with mode and creation date')
 
-    args = parser.parse_args()
-
     return parser.parse_args()
 
 def main():
@@ -73,4 +71,4 @@ def main():
     elif args.path: file_list(args.path)
 
 if __name__ == '__main__':
-    main()
+    main()  
