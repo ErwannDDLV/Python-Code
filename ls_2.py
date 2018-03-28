@@ -16,8 +16,8 @@ def file_list(path):
             print(file)
 
 def files_list_mode(path):
-    onlyfiles = next(os.walk(path))[2]
-    print('total : %s' % len(onlyfiles))
+    files_count = len([file for file in os.listdir(path) if os.path.isfile(os.path.join(path, file)) and file[0] != '.'])
+    print('total : %s' % files_count)
 
     for file in os.listdir(path):
         pathname = os.path.join(path, file)
