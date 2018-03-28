@@ -18,13 +18,18 @@ def file_list(path):
                 total.append(file)
                 print(file)
         if len(total) == 0:
-            print('No file in your directory : %s' % path)
+            print('--- No file in your directory : %s ---' % path)
+        elif len(total) != 0:
+            print('--- %s file(s) found ---' % len(total))
+
     else:
         for file in glob.glob(path + '*.*', recursive=True):
             total.append(file)
             print(os.path.basename(file))
-        if len(total) == 0:
-            print('No file in your directory starting with : %s' % os.path.basename(path))
+        if len(total) != 0:
+            print('--- %s file(s) found ---' % len(total))
+        elif len(total) == 0:
+            print('--- No file in your directory starting with : %s ---' % os.path.basename(path))
             
 def files_list_mode(path):
     total = []
@@ -32,16 +37,16 @@ def files_list_mode(path):
         if os.path.isfile(os.path.join(path, file)) and not file.startswith('.'):
             total.append(file)
     if len(total) == 0:
-        print('No file in your directory : %s' % path)
-    print('total : %s' % len(total))
+        print('--- No file in your directory : %s ---' % path)
+    print('--- %s file(s) with mode and creation date ---' % len(total))
 
     for file in os.listdir(path):
         pathname = os.path.join(path, file)
         permissions = stat.filemode(os.stat(pathname).st_mode)
-        created_date = datetime.fromtimestamp(os.stat(pathname).st_ctime)
+        created_date = datetime.fromtimestamp(os.stat(pathname).st_ctime).date()
 
         if os.path.isfile(pathname) and not file.startswith('.'):
-            print("%s %s %s" % (
+            print("%s   %s   %s" % (
                 permissions,
                 created_date,
                 file)
