@@ -21,7 +21,10 @@ def file_list(path):
             print('No file in your directory : %s' % path)
     else:
         for file in glob.glob(path + '*.*', recursive=True):
+            total.append(file)
             print(os.path.basename(file))
+        if len(total) == 0:
+            print('No file in your directory starting with : %s' % os.path.basename(path))
             
 def files_list_mode(path):
     total = []
@@ -44,8 +47,7 @@ def files_list_mode(path):
                 file)
             )
 
-def main():
-
+def parse_args(args):
     parser = argparse.ArgumentParser(
         prog="test for Brice",
         usage='%(prog)s [options]',
@@ -58,6 +60,10 @@ def main():
 
     args = parser.parse_args()
 
+    return parser.parse_args()
+
+def main():
+    args = parse_args(sys.argv[1:])
     if args.files_list_mode: files_list_mode(args.path)
     elif args.path: file_list(args.path)
 
