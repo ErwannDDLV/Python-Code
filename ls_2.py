@@ -8,7 +8,7 @@ import stat
 import sys
 import time
 
-from datetime import datetime
+from datetime import datetime 
 
 def file_list(path):
     for file in os.listdir(path):
@@ -31,8 +31,8 @@ def files_list_mode(path):
                 file)
             )
 
-# def prefix_files(path, prefix):
-#     for file in glob.glob(os.path.join(path, prefix + '*.*')):
+# def prefix_files(path, basename):
+#     for file in glob.glob(os.path.join(path, '?.*')):
 #         if os.path.isfile(os.path.join(path, file)):
 #             print(os.path.basename(file))
 
@@ -47,8 +47,10 @@ def main():
     )
         
     parser.add_argument("path", help='path to your folder')
+    # parser.add_argument("basename", help='basename file')
+
     parser.add_argument('-l', "--files_list_mode", action = 'store_const', const = files_list_mode, help='List files from your directory with mode and creation date')
-    parser.add_argument('-p', "--prefix_files", help='List files from your directory with specific prefix')
+    parser.add_argument('-p', "--prefix_files", type=str, help='enter the 4 first letters to list the files from your directory')
     # action = 'store_const', const = prefix_files,
 
     args = parser.parse_args()
