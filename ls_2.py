@@ -59,7 +59,7 @@ def parse_args(args):
         formatter_class=lambda prog: argparse.HelpFormatter(prog, width=100, max_help_position=30), 
         description='List files in directory and return the result.'
     )
-        
+
     parser.add_argument("path", help='path to your folder')
     parser.add_argument('-l', "--files_list_mode", action = 'store_const', const = files_list_mode, help='List files from your directory with mode and creation date')
 
